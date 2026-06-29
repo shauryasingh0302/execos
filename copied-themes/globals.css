@@ -155,7 +155,7 @@
     @apply border-border outline-ring/50;
   }
   html {
-    @apply bg-background;
+    @apply bg-transparent;
   }
   body {
     @apply bg-transparent text-foreground min-h-screen;
@@ -204,9 +204,9 @@
   /* Logo / Sidebar */
   .logo-container        { @apply flex h-16 items-center justify-between px-4; }
   .logo-text             { @apply text-xl font-bold text-white; }
-  .sidebar-container     { @apply w-24 lg:w-64 border-r border-border bg-sidebar; }
+  .sidebar-container     { @apply w-40 lg:w-64 border-r border-border bg-sidebar; }
   .sidebar-inner         { @apply flex h-full flex-col; }
-  .sidebar-nav           { @apply flex-1 space-y-1 p-2 lg:p-4 flex flex-col items-start; }
+  .sidebar-nav           { @apply flex-1 space-y-1 p-4 flex flex-col items-start; }
   .sidebar-nav-button    { @apply w-full justify-start gap-3 text-white; }
   .sidebar-icon          { @apply h-5 w-5; }
   .sidebar-section       { @apply border-t border-border p-4; }

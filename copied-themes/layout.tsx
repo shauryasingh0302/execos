@@ -22,7 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="min-h-screen w-full relative">
         <ClerkProvider
           appearance={{
-            theme: shadcn,
+            baseTheme: shadcn,
             variables: {
               colorPrimary: "oklch(0.6 0.2 25)",
               colorPrimaryForeground: "#ffffff",
