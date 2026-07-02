@@ -8,6 +8,7 @@ export default function Page() {
                     elements: {
                         rootBox: "mx-auto",
                         card: "shadow-xl",
+                        
                     },
                 }}
             />
