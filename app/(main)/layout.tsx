@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { getOrCreateUser } from "@/lib/db/queries";
 import { UserButton } from "@clerk/nextjs";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { HomeIcon, MailIcon, SettingsIcon, ZapIcon } from "lucide-react";
@@ -20,6 +21,12 @@ export default async function MainLayout({
     }
 
     const clerkUser = await currentUser();
+
+    const email = clerkUser?.emailAddresses[0]?.emailAddress;
+
+    //get the user from the db or create the user
+
+    const user = await getOrCreateUser(userId, email!);
 
     const isPaidUser = has({ plan: "premium" });
 

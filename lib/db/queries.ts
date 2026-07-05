@@ -7,6 +7,7 @@ import {
   tasks,
   users,
 } from "./schema";
+import { GoogleProvider } from "../google";
 // import { GoogleProvider } from "@/lib/google";
 
 export async function getUserByClerkId(clerkId: string) {
