@@ -50,7 +50,7 @@ export default async function MainLayout({
 
     return (
         <div className="layout-wrapper">
-            <aside className="sidebar-container">
+            <aside className="sidebar-container mt-2">
                 <div className="sidebar-inner">
                     <div className="logo-container">
                         <Link href="/">
@@ -112,7 +112,7 @@ export default async function MainLayout({
             </aside>
 
             <main className="main-content">
-                <div className="main-content-inner">{children}</div>
+                <div className="main-content-inner ml-10">{children}</div>
             </main>
         </div>
     );

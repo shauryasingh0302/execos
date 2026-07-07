@@ -102,13 +102,18 @@ export async function completeAgentRun(
     emailsProcessed: number;
     tasksCreated: number;
     draftsCreated: number;
+    eventsCreated?: number;
     errorMessage?: string;
     durationMs: number;
   },
 ) {
   const [run] = await db
     .update(agentRuns)
-    .set({ ...data, completedAt: new Date() })
+    .set({
+      ...data,
+      eventsCreated: data.eventsCreated ?? 0,
+      completedAt: new Date(),
+    })
     .where(eq(agentRuns.id, agentRunId))
     .returning();
   return run;

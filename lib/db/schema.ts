@@ -121,6 +121,7 @@ export const agentRuns = pgTable("agent_runs", {
   emailsProcessed: integer("emails_processed").default(0).notNull(),
   tasksCreated: integer("tasks_created").default(0).notNull(),
   draftsCreated: integer("drafts_created").default(0).notNull(),
+  eventsCreated: integer("events_created").default(0).notNull(),
   errorMessage: text("error_message"),
   startedAt: timestamp("started_at").defaultNow().notNull(),
   completedAt: timestamp("completed_at"),
