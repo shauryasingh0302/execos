@@ -48,9 +48,9 @@ export async function POST() {
     const results = [];
     const eligibleUsers = await getUsersWithAgentEnabled();
     for (const user of eligibleUsers) {
-        const result = await runAgent(user.id);
-        result.push({
-            userId: user.id,
+        const result = await runAgent(user.userId);
+        results.push({
+            userId: user.userId,
             status: result.status,
             summary: result.summary,
         });
