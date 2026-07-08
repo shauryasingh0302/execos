@@ -5,6 +5,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import PricingButton from "../components/ui/pricing-button"
 import {
     PricingTable,
     SignInButton,
@@ -13,11 +14,13 @@ import {
 } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
+import LenisProvider from "@/components/provider/lenis-provider";
 
 const Page = async () => {
     const { userId } = await auth();
 
     return (
+        <LenisProvider>
         <div className="landing-wrapper">
             <header className="landing-header">
                 <div className="landing-header-inner">
@@ -53,7 +56,7 @@ const Page = async () => {
                         </span>
                     </p>
                     <h1>
-                        Your Autonomour Executive
+                        Your Autonomous Executive
                         <br />
                         Assistant
                     </h1>
@@ -68,9 +71,7 @@ const Page = async () => {
                                 Start Free Trial
                             </Button>
                         </Link>
-                        <Button size="lg" variant="outline" className="text-lg">
-                            See how it works
-                        </Button>
+                        <PricingButton/>
                     </div>
                 </div>
             </section>
@@ -139,6 +140,7 @@ const Page = async () => {
                 </div>
             </footer>
         </div>
+        </LenisProvider>
     );
 };
 

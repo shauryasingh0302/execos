@@ -20,7 +20,7 @@ export async function runAgent(userId: string) {
         const gmailClient = await getGmailClient(userId);
         if (!gmailClient) {
             const run = await completeAgentRun(agentRun.id, {
-                status: "failed",
+                status: "Failed",
                 summary: "Gmail not connected",
                 actionsLog: [],
                 emailsProcessed: 0,
@@ -31,7 +31,7 @@ export async function runAgent(userId: string) {
             });
             return {
                 runId: run.id,
-                status: "failed" as const,
+                status: "Failed" as const,
                 summary: "Gmail not connected",
             };
         }
@@ -39,7 +39,7 @@ export async function runAgent(userId: string) {
         const emails = await fetchUnreadEmails(gmailClient, 10);
         if (emails.length === 0) {
             const run = await completeAgentRun(agentRun.id, {
-                status: "success",
+                status: "Success",
                 summary: "No unread emails to process",
                 actionsLog: [],
                 emailsProcessed: 0,
@@ -49,7 +49,7 @@ export async function runAgent(userId: string) {
             });
             return {
                 runId: run.id,
-                status: "success" as const,
+                status: "Success" as const,
                 summary: "No unread emails to process",
             };
         }
@@ -131,7 +131,7 @@ export async function runAgent(userId: string) {
                         subject: email.subject,
                         from: email.from,
                         date: email.date,
-                        status: "success" as const,
+                        status: "Success" as const,
                         summary: analysis.summary,
                         priority: analysis.priority,
                         category: analysis.category,
@@ -150,7 +150,7 @@ export async function runAgent(userId: string) {
                         subject: email.subject,
                         from: email.from,
                         date: email.date,
-                        status: "error" as const,
+                        status: "Error" as const,
                         error:
                             error instanceof Error
                                 ? error.message
@@ -180,7 +180,7 @@ export async function runAgent(userId: string) {
                     draftCreated: entry.draftCreated,
                     eventsCreated: entry.eventsCreated,
                 });
-                if (entry.status === "success") {
+                if (entry.status === "Success") {
                     totalTasksCreated += entry.tasksCreated ?? 0;
                     totalDraftsCreated += entry.draftCreated ? 1 : 0;
                     totalEventsCreated += entry.eventsCreated ?? 0;
@@ -198,7 +198,7 @@ export async function runAgent(userId: string) {
                     subject: "unknown",
                     from: "unknown",
                     date: new Date().toISOString(),
-                    status: "error",
+                    status: "Error",
                     error:
                         result.reason instanceof Error
                             ? result.reason.message
@@ -207,12 +207,12 @@ export async function runAgent(userId: string) {
             }
         }
         const successCount = actionsLog.filter(
-            (entry) => entry.status === "success",
+            (entry) => entry.status === "Success",
         ).length;
         const errorCount = actionsLog.filter(
-            (entry) => entry.status === "error",
+            (entry) => entry.status === "Error",
         ).length;
-        const overallStatus = successCount > 0 ? "success" : "failed";
+        const overallStatus = successCount > 0 ? "Success" : "Failed";
 
         const summary = [
             `Processed ${successCount} email${successCount !== 1 ? "s" : ""}`,
@@ -261,7 +261,7 @@ export async function runAgent(userId: string) {
         const errorMessage =
             error instanceof Error ? error.message : "Unknown error";
         const run = await completeAgentRun(agentRun.id, {
-            status: "failed",
+            status: "Failed",
             summary: "Agent run failed",
             actionsLog: [],
             emailsProcessed: 0,

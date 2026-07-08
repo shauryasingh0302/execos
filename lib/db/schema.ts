@@ -31,9 +31,9 @@ export const taskPriorityEnum = pgEnum("task_priority", [
   "high",
 ]);
 export const agentRunStatusEnum = pgEnum("agent_run_status", [
-  "running",
-  "success",
-  "failed",
+  "Running",
+  "Success",
+  "Failed",
 ]);
 
 // Users table
@@ -89,7 +89,7 @@ export interface ActionLogEntry {
   subject: string;
   from: string;
   date: string;
-  status: "success" | "error";
+  status: "Success" | "Error";
   summary?: string;
   priority?: string;
   category?: string;
@@ -112,7 +112,7 @@ export const agentRuns = pgTable("agent_runs", {
   userId: uuid("user_id")
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
-  status: agentRunStatusEnum("status").default("running").notNull(),
+  status: agentRunStatusEnum("status").default("Running").notNull(),
   summary: text("summary"),
   actionsLog: jsonb("actions_log")
     .$type<ActionLogEntry[]>()

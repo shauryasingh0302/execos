@@ -88,7 +88,7 @@ export async function getUserIntegrations(userId: string) {
 export async function createAgentRun(userId: string) {
   const [result] = await db
     .insert(agentRuns)
-    .values({ userId, status: "running" })
+    .values({ userId, status: "Running" })
     .returning();
   return result ?? null;
 }
@@ -96,7 +96,7 @@ export async function createAgentRun(userId: string) {
 export async function completeAgentRun(
   agentRunId: string,
   data: {
-    status: "success" | "failed";
+    status: "Success" | "Failed";
     summary: string;
     actionsLog: ActionLogEntry[];
     emailsProcessed: number;
@@ -155,7 +155,7 @@ export async function getUnreadEmails(userId: string) {
   const [result] = await db
     .select()
     .from(agentRuns)
-    .where(and(eq(agentRuns.userId, userId), eq(agentRuns.status, "success")))
+    .where(and(eq(agentRuns.userId, userId), eq(agentRuns.status, "Success")))
     .orderBy(desc(agentRuns.startedAt))
     .limit(1);
   return {

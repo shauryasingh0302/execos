@@ -3,6 +3,7 @@ import { Montserrat, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { shadcn } from "@clerk/themes";
+import LenisProvider from "../components/provider/lenis-provider";
 
 const montserrat = Montserrat({
     subsets: ["latin"],
@@ -45,7 +46,6 @@ export default function RootLayout({
                     }}
                 >
                     {children}
-
                 </ClerkProvider>
             </body>
         </html>

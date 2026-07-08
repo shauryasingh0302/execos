@@ -156,10 +156,12 @@
   }
   html {
     @apply bg-background;
+    overflow-y: auto;
   }
   body {
     @apply bg-transparent text-foreground min-h-screen;
     position: relative;
+    @apply select-none;
   }
 
   a,
