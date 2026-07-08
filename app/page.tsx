@@ -1,5 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { PricingTable, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import {
+    Card,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import {
+    PricingTable,
+    SignInButton,
+    SignUpButton,
+    UserButton,
+} from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 
@@ -32,10 +43,101 @@ const Page = async () => {
                 </div>
             </header>
 
-            <section className="hero-section">
-                <h2>Simple, Transparent Pricing</h2>
-                <PricingTable/>
+            {/* Hero Section */}
+
+            <section className="section-heading">
+                <div className="text-center">
+                    <p>
+                        <span className="hero-subtitle">
+                            The AI that actually does things
+                        </span>
+                    </p>
+                    <h1>
+                        Your Autonomour Executive
+                        <br />
+                        Assistant
+                    </h1>
+
+                    <p className="hero-description">
+                        Clears your inbox, sends emails, manages your calendar
+                        all from favorite chat app.
+                    </p>
+                    <div className="hero-buttons">
+                        <Link href="/sign-up">
+                            <Button size="lg" className="text-lg">
+                                Start Free Trial
+                            </Button>
+                        </Link>
+                        <Button size="lg" variant="outline" className="text-lg">
+                            See how it works
+                        </Button>
+                    </div>
+                </div>
             </section>
+
+            {/* Features Section */}
+
+            <section className="section-heading">
+                <h2>Powerful Features</h2>
+                <div className="features-grid">
+                    {[
+                        {
+                            key: "email-management",
+                            title: "Autonomous Email Management",
+                            description:
+                                "AI processes your emails every 15 minutes, categorizes them, and drafts intelligent replies",
+                        },
+                        {
+                            key: "task-extraction",
+                            title: "Smart Task Extraction",
+                            description:
+                                "Automatically creates tasks from your emails and calendar events. Never miss a to-do again",
+                        },
+                        {
+                            key: "calendar-intelligence",
+                            title: "Calendar Intelligence",
+                            description:
+                                "Suggests optimal meeting times, detects conflicts, and keeps your schedule organized",
+                        },
+                    ].map((feature) => (
+                        <Card key={feature.key} className="p-6">
+                            <CardHeader>
+                                <CardTitle className="text-xl text-foreground">
+                                    {feature.title}
+                                </CardTitle>
+                                <CardDescription className="text-base leading-relaxed text-white">
+                                    {feature.description}
+                                </CardDescription>
+                            </CardHeader>
+                        </Card>
+                    ))}
+                </div>
+            </section>
+
+            <section className="section-heading" id="pricing">
+                <h2>Simple, Transparent Pricing</h2>
+                <PricingTable />
+            </section>
+
+            {/* Footer */}
+
+            <footer className="border-t bg-muted/30">
+                <div className="container mx-auto flex h-16 items-center justify-between px-6">
+                    <p className="text-sm text-muted-foreground ml-28">
+                        © {new Date().getFullYear()}{" "}
+                        <span className="font-semibold text-foreground">
+                            ExecOS
+                        </span>
+                    </p>
+
+                    <p className="text-sm text-muted-foreground mr-28">
+                        Designed & Developed by{" "}
+                        <span className="font-semibold text-primary">
+                            Shaurya Singh
+                        </span>
+                    </p>
+                </div>
+            </footer>
         </div>
     );
 };
