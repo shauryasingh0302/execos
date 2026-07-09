@@ -7,6 +7,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
 import {
     getLatestAgentRun,
     getOrCreateUser,
@@ -14,7 +15,13 @@ import {
     getUserIntegrations,
 } from "@/lib/db/queries";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { Badge, CheckCircle2Icon, CircleIcon, ZapIcon, Bot, BotIcon } from "lucide-react";
+import {
+    CheckCircle2Icon,
+    CircleIcon,
+    ZapIcon,
+    Bot,
+    BotIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -76,7 +83,6 @@ export default async function Dashboard() {
                 <p className="page-description">
                     Welcome back! Here's what's happening with your AI Agents.
                 </p>
-                {/* <RunAgentButton /> */}
             </div>
 
             {/* 1. First Progress Card  */}
@@ -167,7 +173,11 @@ export default async function Dashboard() {
 
                     <Card>
                         <CardHeader>
-                            <CardTitle className="card-title-with-icon"> <BotIcon className="sidebar-icon" />Last Agent Run</CardTitle>
+                            <CardTitle className="card-title-with-icon">
+                                {" "}
+                                <BotIcon className="sidebar-icon" />
+                                Last Agent Run
+                            </CardTitle>
                             <CardDescription>
                                 {latestRun
                                     ? "Most Recent Activity"
@@ -215,7 +225,7 @@ export default async function Dashboard() {
 
                 <div className="stats-grid-3">
                     {[
-                        { label: "Unread Emails", value: emailsProcessed },
+                        { label: "Emails Processed", value: emailsProcessed },
                         { label: "Drafts Created", value: draftsCreated },
                         { label: "Tasks Created", value: tasksCreated },
                     ].map((item) => (
